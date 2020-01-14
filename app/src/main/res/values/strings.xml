@@ -1,0 +1,13 @@
+<resources>
+  <string name="app_name">Async UI</string>
+
+  <string name="dialog_title">Hello there</string>
+  <string name="dialog_subtitle">What result should I deliver?</string>
+  <string name="dialog_text_hint">What result should I deliver?</string>
+  <string name="positive">Positive</string>
+  <string name="negative">Negative</string>
+  <string name="neutral">Neutral</string>
+  <string name="appearing_text">Hello I am moving in</string>
+  <string name="result_number">Result is %d</string>
+  <string name="title_activity_with_result">Activity With Result</string>
+</resources>

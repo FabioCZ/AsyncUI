@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graphs"
+    app:startDestination="@id/homeFragment">
+
+  <fragment
+      android:id="@+id/homeFragment"
+      android:name="com.gottlicher.asyncuidemo.HomeFragment"
+      android:label="Async UI - Home"
+      tools:layout="@layout/fragment_home" >
+    <action
+        android:id="@+id/action_homeFragment_to_dialogDemoFragment"
+        app:destination="@id/dialogDemoFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/action_homeFragment_to_textInputDialogDemo"
+        app:destination="@id/textInputDialogDemo"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/action_homeFragment_to_asyncAnimatorFragment"
+        app:destination="@id/asyncAnimatorFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/action_homeFragment_to_loadingDemoFragment"
+        app:destination="@id/loadingDemoFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_activityResultDemoFragment"
+        app:destination="@id/activityResultDemoFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_viewPagerDemoFragment"
+        app:destination="@id/viewPagerDemoFragment" />
+  </fragment>
+  <fragment
+      android:id="@+id/dialogDemoFragment"
+      android:name="com.gottlicher.asyncuidemo.demos.DialogDemoFragment"
+      android:label="Alert Dialog"
+      tools:layout="@layout/fragment_dialog_demo" />
+  <fragment
+      android:id="@+id/textInputDialogDemo"
+      android:name="com.gottlicher.asyncuidemo.demos.TextInputDialogDemoFragment"
+      android:label="Text Input Dialog"
+      tools:layout="@layout/fragment_text_input_dialog_demo" />
+  <fragment
+      android:id="@+id/asyncAnimatorFragment"
+      android:name="com.gottlicher.asyncuidemo.demos.AsyncAnimatorFragment"
+      android:label="Async Animator"
+      tools:layout="@layout/fragment_async_animator" />
+  <fragment
+      android:id="@+id/loadingDemoFragment"
+      android:name="com.gottlicher.asyncuidemo.demos.LoadingDemoFragment"
+      android:label="Loading time consuming resources"
+      tools:layout="@layout/fragment_loading_demo" />
+  <fragment
+      android:id="@+id/activityResultDemoFragment"
+      android:name="com.gottlicher.asyncuidemo.demos.ActivityResultDemoFragment"
+      android:label="Activity Result"
+      tools:layout="@layout/fragment_activity_result_demo" />
+  <fragment
+      android:id="@+id/viewPagerDemoFragment"
+      android:name="com.gottlicher.asyncuidemo.demos.ViewPagerDemoFragment"
+      android:label="View Pager"
+      tools:layout="@layout/fragment_view_pager_demo" />
+</navigation>
