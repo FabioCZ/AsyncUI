@@ -20,5 +20,4 @@ class ActivityWithResult : AppCompatActivity(R.layout.activity_with_result) {
         setResult(result)
         finish()
     }
-
 }

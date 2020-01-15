@@ -30,11 +30,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         view.homeRecycler.layoutManager = LinearLayoutManager(context)
         view.homeRecycler.addItemDecoration(DividerItemDecoration(context!!))
-        view.setOnClickListener {
-            view.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 ->
-                
-            }
-        }
 
         view.homeRecycler.adapter = DestinationsAdapter(findNavController())
         (view.homeRecycler.adapter as DestinationsAdapter).notifyDataSetChanged()

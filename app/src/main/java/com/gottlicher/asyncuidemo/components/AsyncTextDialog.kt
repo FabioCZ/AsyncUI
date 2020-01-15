@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.widget.EditText
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 data class TextDialogResult(
     val dialogResult: DialogResult,
@@ -18,9 +20,8 @@ class AsyncTextDialog(
     private val neutralButtonText: Int? = null
 ) {
 
-    suspend fun show(context: Context): TextDialogResult {
-
-        val completion = CompletableDeferred<TextDialogResult>()
+    suspend fun show(context: Context): TextDialogResult = suspendCancellableCoroutine { cont ->
+        var cancelledByUser = false
 
         val builder = AlertDialog.Builder(context)
         builder.setTitle(title)
@@ -29,30 +30,34 @@ class AsyncTextDialog(
 
         if (positiveButtonText != null) {
             builder.setPositiveButton(positiveButtonText) { _, _ ->
-                completion.complete(
-                    TextDialogResult(DialogResult.POSITIVE, editText.text.toString())
-                )
+                cont.resume(TextDialogResult(DialogResult.POSITIVE, editText.text.toString()))
             }
         }
 
         if (negativeButtonText != null) {
             builder.setNegativeButton(negativeButtonText) { _, _ ->
-                completion.complete(
-                    TextDialogResult(DialogResult.NEGATIVE, editText.text.toString())
-                )
+                cont.resume(TextDialogResult(DialogResult.NEGATIVE, editText.text.toString()))
             }
         }
 
         if (neutralButtonText != null) {
             builder.setNegativeButton(neutralButtonText) { _, _ ->
-                completion.complete(
-                    TextDialogResult(DialogResult.NEUTRAL, editText.text.toString())
-                )
+                cont.resume(TextDialogResult(DialogResult.NEUTRAL, editText.text.toString()))
             }
         }
 
-        builder.create().show()
-        return completion.await()
+        val dialog = builder.create()
+
+        dialog.setOnCancelListener {
+            cancelledByUser = true
+            cont.cancel()
+        }
+
+        cont.invokeOnCancellation {
+            if (!cancelledByUser) dialog.cancel()
+        }
+
+        dialog.show()
     }
 
     private fun makeEditText(context: Context, hint: Int): EditText {

@@ -21,24 +21,24 @@ class DialogDemoFragment : Fragment(R.layout.fragment_dialog_demo) {
         showDialogAndCancel.setOnClickListener { onShowAndCancelClick() }
     }
 
-    private fun onShowClick() {
-        viewLifecycleOwner.lifecycleScope.launch {
+    private fun onShowClick() = viewLifecycleOwner.lifecycleScope.launch {
+        try {
             val result = showDialogAndReturnResult()
             dialogResultText.text = "Dialog result is: $result"
+        } catch (e: CancellationException) {
+            dialogResultText.text = "Dialog was dismissed"
         }
     }
 
-    private fun onShowAndCancelClick() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val job = async { showDialogAndReturnResult() }
-            delay(1000)
-            job.cancel(CancellationException("Cancel me"))
-            try {
-                val result = job.await()
-                dialogResultText.text = "Dialog result is: $result"
-            } catch (e: CancellationException) {
-                dialogResultText.text = "Dialog was dismissed"
-            }
+    private fun onShowAndCancelClick() = viewLifecycleOwner.lifecycleScope.launch {
+        val job = async { showDialogAndReturnResult() }
+        delay(1000)
+        job.cancel(CancellationException("Cancel me"))
+        try {
+            val result = job.await()
+            dialogResultText.text = "Dialog result is: $result"
+        } catch (e: CancellationException) {
+            dialogResultText.text = "Dialog was dismissed"
         }
     }
 

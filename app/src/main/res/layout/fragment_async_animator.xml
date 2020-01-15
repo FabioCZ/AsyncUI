@@ -21,9 +21,12 @@
       android:id="@+id/progressIndicator"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textSize="20dp"
+      android:text="Animation not started"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toBottomOf="@+id/cancelButton" />
 
   <Button
       android:id="@+id/cancelButton"
@@ -31,16 +34,17 @@
       android:layout_height="wrap_content"
       android:text="Cancel Animation"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/progressIndicator" />
+      app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
   <Button
-      android:id="@+id/restartButton"
+      android:id="@+id/startButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="Restart Animation"
+      android:text="Start Animation"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/cancelButton" />
+      app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

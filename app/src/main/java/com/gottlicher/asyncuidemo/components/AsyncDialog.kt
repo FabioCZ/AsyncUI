@@ -22,6 +22,8 @@ class AsyncAlertDialog(
 
     suspend fun show(context: Context): DialogResult = suspendCancellableCoroutine { cont ->
 
+        var cancelledByUser = false
+
         val builder = AlertDialog.Builder(context)
         if (title != null) {
             builder.setTitle(title)
@@ -40,8 +42,14 @@ class AsyncAlertDialog(
         }
 
         val dialog = builder.create()
+
+        dialog.setOnCancelListener {
+            cancelledByUser = true
+            cont.cancel()
+        }
+
         cont.invokeOnCancellation {
-            dialog.cancel()
+            if (!cancelledByUser) dialog.cancel()
         }
 
         dialog.show()

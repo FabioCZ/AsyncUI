@@ -17,6 +17,7 @@ data class ActivityResult(
     val data: Intent?
 )
 
+// Do not use this - what would happen if the device is rotated and the target activity is recreated?
 class ActivityResultDemoFragment : Fragment(R.layout.fragment_activity_result_demo) {
 
     companion object {
