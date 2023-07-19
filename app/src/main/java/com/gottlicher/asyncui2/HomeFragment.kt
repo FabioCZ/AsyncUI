@@ -1,4 +1,4 @@
-package com.gottlicher.asyncuidemo
+package com.gottlicher.asyncui2
 
 
 import android.content.Context
@@ -8,18 +8,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.collection.SparseArrayCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavAction
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.demo_list_item.view.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import com.gottlicher.asyncui2.databinding.DemoListItemBinding
+import com.gottlicher.asyncui2.databinding.FragmentHomeBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -27,12 +26,13 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = FragmentHomeBinding.bind(view)
 
-        view.homeRecycler.layoutManager = LinearLayoutManager(context)
-        view.homeRecycler.addItemDecoration(DividerItemDecoration(context!!))
+        binding.homeRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.homeRecycler.addItemDecoration(DividerItemDecoration(requireContext()))
 
-        view.homeRecycler.adapter = DestinationsAdapter(findNavController())
-        (view.homeRecycler.adapter as DestinationsAdapter).notifyDataSetChanged()
+        binding.homeRecycler.adapter = DestinationsAdapter(findNavController(binding.root))
+        (binding.homeRecycler.adapter as DestinationsAdapter).notifyDataSetChanged()
     }
 
     class DestinationsAdapter(private val navigationController: NavController): RecyclerView.Adapter<DestinationVH>() {
@@ -41,23 +41,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         init {
             val destination = navigationController.currentDestination
-            val actionsField = NavDestination::class.java.getDeclaredField("mActions")
+            val actionsField = NavDestination::class.java.getDeclaredField("actions")
             actionsField.isAccessible = true
             actions = actionsField.get(destination) as SparseArrayCompat<NavAction>
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DestinationVH =
-            DestinationVH(LayoutInflater.from(parent.context).inflate(R.layout.demo_list_item, parent, false))
+            DestinationVH(DemoListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
         override fun getItemCount(): Int = actions.size()
 
         override fun onBindViewHolder(holder: DestinationVH, position: Int) {
             val dest = navigationController.graph.findNode(actions.valueAt(position).destinationId)
-            holder.itemView.demoLabel.text = dest?.label
-            holder.itemView.setOnClickListener { holder.itemView.findNavController().navigate(actions.keyAt(position)) }
+            holder.binding.demoLabel.text = dest?.label
+            holder.binding.root.setOnClickListener { holder.itemView.findNavController().navigate(actions.keyAt(position)) }
         }
     }
 
-    class DestinationVH(view: View) : RecyclerView.ViewHolder(view)
+    class DestinationVH(val binding: DemoListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 

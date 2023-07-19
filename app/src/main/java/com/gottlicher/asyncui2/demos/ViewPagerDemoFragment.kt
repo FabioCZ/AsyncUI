@@ -1,32 +1,35 @@
-package com.gottlicher.asyncuidemo.demos
+package com.gottlicher.asyncui2.demos
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
-import com.gottlicher.asyncuidemo.R
-import com.gottlicher.asyncuidemo.components.awaitPageChange
-import kotlinx.android.synthetic.main.fragment_view_pager_demo.*
+import com.gottlicher.asyncui2.R
+import com.gottlicher.asyncui2.components.awaitPageChange
+import com.gottlicher.asyncui2.databinding.FragmentViewPagerDemoBinding
+import com.gottlicher.asyncui2.util.viewBinding
 import kotlinx.coroutines.launch
 
 
 class ViewPagerDemoFragment : Fragment(R.layout.fragment_view_pager_demo) {
 
+    private val binding by viewBinding(FragmentViewPagerDemoBinding::bind)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager.adapter = ViewPagerAdapter()
-        nextPageButton.setOnClickListener { goToNextPage() }
+        binding.viewPager.adapter = ViewPagerAdapter()
+        binding.nextPageButton.setOnClickListener { goToNextPage() }
     }
 
     private fun goToNextPage() = viewLifecycleOwner.lifecycleScope.launch {
-        transitionStateText.text = "Page is transitioning"
-        val nextItem = (viewPager.currentItem + 1) % viewPager.adapter!!.count
-        viewPager.currentItem = nextItem
-        viewPager.awaitPageChange()
-        transitionStateText.text = "Page finished transitioning"
+        binding.transitionStateText.text = "Page is transitioning"
+        val nextItem = (binding.viewPager.currentItem + 1) % binding.viewPager.adapter!!.count
+        binding.viewPager.currentItem = nextItem
+        binding.viewPager.awaitPageChange()
+        binding.transitionStateText.text = "Page finished transitioning"
     }
 
     class ViewPagerAdapter : PagerAdapter() {

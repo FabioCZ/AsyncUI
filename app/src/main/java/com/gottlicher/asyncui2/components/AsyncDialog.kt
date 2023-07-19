@@ -1,8 +1,7 @@
-package com.gottlicher.asyncuidemo.components
+package com.gottlicher.asyncui2.components
 
 import android.app.AlertDialog
 import android.content.Context
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 

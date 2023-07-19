@@ -1,4 +1,4 @@
-package com.gottlicher.asyncuidemo.components
+package com.gottlicher.asyncui2.components
 
 import androidx.viewpager.widget.ViewPager
 import kotlinx.coroutines.suspendCancellableCoroutine

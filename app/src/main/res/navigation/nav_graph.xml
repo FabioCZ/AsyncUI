@@ -6,7 +6,7 @@
 
   <fragment
       android:id="@+id/homeFragment"
-      android:name="com.gottlicher.asyncuidemo.HomeFragment"
+      android:name="com.gottlicher.asyncui2.HomeFragment"
       android:label="Async UI - Home"
       tools:layout="@layout/fragment_home" >
     <action
@@ -44,30 +44,55 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_homeFragment_to_permissionsDemoFragment"
+        app:destination="@id/permissionsDemoFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/action_homeFragment_to_locationDemoFragment"
+        app:destination="@id/locationDemoFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <fragment
       android:id="@+id/dialogDemoFragment"
-      android:name="com.gottlicher.asyncuidemo.demos.DialogDemoFragment"
+      android:name="com.gottlicher.asyncui2.demos.DialogDemoFragment"
       android:label="Alert Dialog"
       tools:layout="@layout/fragment_dialog_demo" />
   <fragment
       android:id="@+id/textInputDialogDemo"
-      android:name="com.gottlicher.asyncuidemo.demos.TextInputDialogDemoFragment"
+      android:name="com.gottlicher.asyncui2.demos.TextInputDialogDemoFragment"
       android:label="Text Input Dialog"
       tools:layout="@layout/fragment_text_input_dialog_demo" />
   <fragment
       android:id="@+id/asyncAnimatorFragment"
-      android:name="com.gottlicher.asyncuidemo.demos.AsyncAnimatorFragment"
+      android:name="com.gottlicher.asyncui2.demos.AsyncAnimatorFragment"
       android:label="Async Animator"
       tools:layout="@layout/fragment_async_animator" />
   <fragment
       android:id="@+id/activityResultDemoFragment"
-      android:name="com.gottlicher.asyncuidemo.demos.ActivityResultDemoFragment"
+      android:name="com.gottlicher.asyncui2.demos.ActivityResultDemoFragment"
       android:label="Activity Result"
       tools:layout="@layout/fragment_activity_result_demo" />
   <fragment
       android:id="@+id/viewPagerDemoFragment"
-      android:name="com.gottlicher.asyncuidemo.demos.ViewPagerDemoFragment"
+      android:name="com.gottlicher.asyncui2.demos.ViewPagerDemoFragment"
       android:label="View Pager"
       tools:layout="@layout/fragment_view_pager_demo" />
+  <fragment
+    android:id="@+id/permissionsDemoFragment"
+    android:name="com.gottlicher.asyncui2.demos.PermissionsFragment"
+    android:label="Permissions"
+    tools:layout="@layout/fragment_permissions" />
+  <fragment
+      android:id="@+id/locationDemoFragment"
+      android:name="com.gottlicher.asyncui2.demos.LocationFragment"
+      android:label="Location"
+      tools:layout="@layout/fragment_location" />
 </navigation>

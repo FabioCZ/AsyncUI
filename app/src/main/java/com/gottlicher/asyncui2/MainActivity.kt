@@ -1,13 +1,12 @@
-package com.gottlicher.asyncuidemo
+package com.gottlicher.asyncui2
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.coroutines.launch
+import com.markodevcic.peko.PermissionRequester
 
 class MainActivity : AppCompatActivity(R.layout.activity_main){
 
@@ -18,11 +17,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        lifecycleScope.launch {  }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 }

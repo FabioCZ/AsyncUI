@@ -1,4 +1,4 @@
-package com.gottlicher.asyncuidemo.demos
+package com.gottlicher.asyncui2.demos
 
 
 import android.content.Intent
@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.gottlicher.asyncuidemo.R
-import kotlinx.android.synthetic.main.fragment_activity_result_demo.*
+import com.gottlicher.asyncui2.R
+import com.gottlicher.asyncui2.databinding.FragmentActivityResultDemoBinding
+import com.gottlicher.asyncui2.util.viewBinding
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.launch
 
@@ -24,20 +25,22 @@ class ActivityResultDemoFragment : Fragment(R.layout.fragment_activity_result_de
         private const val REQUEST_CODE = 5
     }
 
+    private val binding by viewBinding(FragmentActivityResultDemoBinding::bind)
+
     private var deferred: CompletableDeferred<ActivityResult> = CompletableDeferred()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startActivityButton.setOnClickListener { onStartActivityClicked() }
+        binding.startActivityButton.setOnClickListener { onStartActivityClicked() }
     }
 
 
     private fun onStartActivityClicked() = viewLifecycleOwner.lifecycleScope.launch {
         val result = startActivityAndAwaitResult(Intent(context, ActivityWithResult::class.java), REQUEST_CODE)
         if (result.requestCode == REQUEST_CODE) {
-            resultText.text = "Result is ${result.resultCode}"
+            binding.resultText.text = "Result is ${result.resultCode}"
         } else {
-            resultText.text = "Request codes do not match"
+            binding.resultText.text = "Request codes do not match"
         }
     }
 
